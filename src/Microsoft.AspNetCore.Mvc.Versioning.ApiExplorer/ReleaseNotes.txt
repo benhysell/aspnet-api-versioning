@@ -1,1 +1,1 @@
-﻿None
+﻿Preview release with support for .NET 5.0
