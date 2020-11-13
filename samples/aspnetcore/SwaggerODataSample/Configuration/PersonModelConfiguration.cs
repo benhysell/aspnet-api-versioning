@@ -29,6 +29,11 @@
                 person.Ignore( p => p.Email );
             }
 
+            if ( apiVersion >= ApiVersions.V1 )
+            {
+                person.Collection.Function( "MostExpensive" ).ReturnsFromEntitySet<Person>( "People" );
+            }
+
             if ( apiVersion > ApiVersions.V1 )
             {
                 person.ContainsOptional( p => p.HomeAddress );

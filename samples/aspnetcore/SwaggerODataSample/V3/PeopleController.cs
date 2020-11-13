@@ -2,6 +2,7 @@
 {
     using Microsoft.AspNet.OData;
     using Microsoft.AspNet.OData.Query;
+    using Microsoft.AspNet.OData.Routing;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Examples.Models;
     using Microsoft.OData;
@@ -212,5 +213,19 @@
                 State = "WA",
                 ZipCode = "98052"
             } );
+
+        /// <summary>
+        /// Gets the most expensive order.
+        /// </summary>
+        /// <returns>The most expensive order.</returns>
+        /// <response code="200">The order was successfully retrieved.</response>
+        /// <response code="404">The no orders exist.</response>
+        [HttpGet]
+        [ODataRoute( nameof( MostExpensive ) )]
+        [Produces( "application/json" )]
+        [ProducesResponseType( typeof( Order ), Status200OK )]
+        [ProducesResponseType( Status404NotFound )]
+        [EnableQuery( AllowedQueryOptions = Select )]
+        public SingleResult<Person> MostExpensive() => SingleResult.Create( new[] { new Person() { Id = 42, FirstName = "Bill Mei" } }.AsQueryable() );
     }
 }
