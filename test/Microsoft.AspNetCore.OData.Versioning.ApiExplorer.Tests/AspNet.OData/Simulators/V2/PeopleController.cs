@@ -1,6 +1,7 @@
 ﻿namespace Microsoft.AspNet.OData.Simulators.V2
 {
     using Microsoft.AspNet.OData;
+    using Microsoft.AspNet.OData.Routing;
     using Microsoft.AspNet.OData.Simulators.Models;
     using Microsoft.AspNetCore.Mvc;
     using System;
@@ -79,5 +80,17 @@
         [Produces( "application/json" )]
         [ProducesResponseType( typeof( ODataValue<IEnumerable<Order>> ), Status200OK )]
         public IActionResult NewHires( DateTime since ) => Get();
+
+        /// <summary>
+        /// Gets the most expensive order.
+        /// </summary>
+        /// <returns>The most expensive order.</returns>
+        /// <response code="200">The order was successfully retrieved.</response>
+        /// <response code="404">The no orders exist.</response>
+        [HttpGet]
+        [Produces( "application/json" )]
+        [ProducesResponseType( typeof( Order ), Status200OK )]
+        [ODataRoute( nameof( MostExpensive ) )]
+        public IActionResult MostExpensive() => Ok( new Person() { Id = 42, LastName = "Mei" } );
     }
 }

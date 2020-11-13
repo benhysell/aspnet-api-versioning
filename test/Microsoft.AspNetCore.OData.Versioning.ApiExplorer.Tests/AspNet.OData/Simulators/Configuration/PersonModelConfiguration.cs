@@ -33,6 +33,11 @@
                 function.ReturnsFromEntitySet<Person>( "People" );
             }
 
+            if ( apiVersion >= ApiVersions.V1 )
+            {
+                person.Collection.Function( "MostExpensive" ).ReturnsFromEntitySet<Person>( "People" );
+            }
+
             if ( apiVersion > ApiVersions.V2 )
             {
                 person.Action( "Promote" ).Parameter<string>( "title" );
